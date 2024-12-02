@@ -221,36 +221,11 @@ namespace AntonCH {
 		int arr_len = AntonCHDLL::Class1::Vvod(ArrLenTB);
 		int* arr = new int[arr_len] {};
 		AntonCHDLL::Class1::input_mas(arr, arr_len, StartDG);
-
-		int res = 0;
-		for (int i = 0; i < arr_len; i++) {
-			if (abs(arr[i]) > 9 && abs(arr[i]) < 100) {
-				int fnum = arr[i] % 10;
-				int snum = (arr[i] - fnum) / 10;
-				if ((fnum + snum) % 5 == 0) {
-					res += 1;
-				}
-			}
-		}
-
+		int res = AntonCHDLL::Class1::L2_find_usl_colvo(arr, arr_len);
 		AntonCHDLL::Class1::Vivod(res, ResultTB);
-
-		int newarr_len = 0;
-		for (int i = 0; i < arr_len; i++) {
-			if (arr[i] < res) {
-				newarr_len++;
-			}
-		}
-
+		int newarr_len = AntonCHDLL::Class1::L2_find_newarr_len(arr, arr_len, res);
 		int* newarr = new int[newarr_len] {};
-		int ni = 0;
-		for (int i = 0; i < arr_len; i++) {
-			if (arr[i] < res) {
-				newarr[ni] = arr[i];
-				ni++;
-			}
-		}
-
+		AntonCHDLL::Class1::L2_fill_newarr(arr, arr_len, res, newarr);
 		AntonCHDLL::Class1::output_mas(newarr, newarr_len, ResultDG);
 
 	}

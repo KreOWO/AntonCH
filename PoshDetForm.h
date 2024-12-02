@@ -220,16 +220,14 @@ namespace AntonCH {
 
 		}
 
-	public: double get_ugol(int x1, int y1, int x2, int y2) {
-		return acos(((x1 * x2) + (y1 * y2)) / (sqrt(pow(x1, 2) + pow(y1, 2)) * sqrt(pow(x2, 2) + pow(y2, 2)))) * 180.0 / 3.14;
-	}
+	
 #pragma endregion
 	private: System::Void SolveBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 		// a = (2; 5), b = (7; 6), c = (9; 3)
 		double ab, bc, ca;
-		ab = get_ugol(2, 5, 7, 6);
-		bc = get_ugol(7, 6, 9, 3);
-		ca = get_ugol(9, 3, 2, 5);
+		ab = AntonCHDLL::Class1::get_ugol(2, 5, 7, 6);
+		bc = AntonCHDLL::Class1::get_ugol(7, 6, 9, 3);
+		ca = AntonCHDLL::Class1::get_ugol(9, 3, 2, 5);
 		AntonCHDLL::Class1::Vivod(ab, ABTB);
 		AntonCHDLL::Class1::Vivod(bc, BCTB);
 		AntonCHDLL::Class1::Vivod(ca, CATB);

@@ -1165,13 +1165,11 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 	private: System::Void Solve3Btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arr_len = AntonCHDLL::Class1::Vvod(ArrLen3TB);
 		int insertvalue = AntonCHDLL::Class1::Vvod(InsertValueTB);
-		int inserdind = AntonCHDLL::Class1::Vvod(InsertIndexTB);
+		int insertind = AntonCHDLL::Class1::Vvod(InsertIndexTB);
 		int* arr = new int[arr_len + 1] {};
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start3DG);
-		for (int i = arr_len; i > inserdind; i--) {
-			arr[i] = arr[i - 1];
-		}
-		arr[inserdind] = insertvalue;
+		AntonCHDLL::Class1::L3_insert_3(arr, arr_len + 1, insertind, insertvalue);
+		arr[insertind] = insertvalue;
 		AntonCHDLL::Class1::output_mas(arr, arr_len + 1, Result3DG);
 	}
 	private: System::Void Generate4Btn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1181,13 +1179,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		int arr_len = AntonCHDLL::Class1::Vvod(ArrLen4TB);
 		int* arr = new int[arr_len] {};
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start4DG);
-		bool Flag = true;
-		for (int i = 1; i < arr_len; i++) {
-			if (arr[i] > arr[i - 1]) {
-				Flag = false;
-				break;
-			}
-		}
+		bool Flag = AntonCHDLL::Class1::L3_monot_4(arr, arr_len);
 		Answer4TB->Text = Convert::ToString(Flag);
 	}
 	private: System::Void Generate5Btn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1199,14 +1191,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start5DG);
 		int val = 0;
 		int ind = -1;
-		for (int i = 0; i < arr_len; i++) {
-			if (arr[i] < 0) {
-				ind = i;
-				val = arr[i];
-				break;
-			}
-		}
-
+		AntonCHDLL::Class1::L3_fneg_5(arr, arr_len, &ind, &val);
 		AntonCHDLL::Class1::Vivod(ind, Answer5iTB);
 		AntonCHDLL::Class1::Vivod(val, Answer5vTB);
 	}
@@ -1219,14 +1204,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start6DG);
 		int val = 0;
 		int ind = -1;
-		for (int i = 0; i < arr_len; i++) {
-			if (arr[i] % 2 != 0) {
-				ind = i;
-				val = arr[i];
-				break;
-			}
-		}
-
+		AntonCHDLL::Class1::L3_fnech_6(arr, arr_len, &ind, &val);
 		AntonCHDLL::Class1::Vivod(ind, Answer6iTB);
 		AntonCHDLL::Class1::Vivod(val, Answer6vTB);
 	}
@@ -1239,14 +1217,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start7DG);
 		int val = 0;
 		int ind = -1;
-		for (int i = 0; i < arr_len; i++) {
-			if (arr[i] > 0) {
-				ind = i;
-				val = arr[i];
-				break;
-			}
-		}
-
+		AntonCHDLL::Class1::L3_fpos_7(arr, arr_len, &ind, &val);
 		AntonCHDLL::Class1::Vivod(ind, Answer7iTB);
 		AntonCHDLL::Class1::Vivod(val, Answer7vTB);
 	}
@@ -1259,14 +1230,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start8DG);
 		int val = 0;
 		int ind = -1;
-		for (int i = 0; i < arr_len; i++) {
-			if (arr[i] % 2 == 0) {
-				ind = i;
-				val = arr[i];
-				break;
-			}
-		}
-
+		AntonCHDLL::Class1::L3_fchet_8(arr, arr_len, &ind, &val);
 		AntonCHDLL::Class1::Vivod(ind, Answer8iTB);
 		AntonCHDLL::Class1::Vivod(val, Answer8vTB);
 	}
@@ -1277,17 +1241,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		int arr_len = AntonCHDLL::Class1::Vvod(ArrLen9TB);
 		int* arr = new int[arr_len] {};
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start9DG);
-		for (int i = 1; i < arr_len; ++i) {
-			int key = arr[i]; // Вставляемый элемент
-			int j = i - 1;
-
-			// Сдвигаем элементы, чтобы найти подходящее место для вставки
-			while (j >= 0 && arr[j] > key) {
-				arr[j + 1] = arr[j];
-				--j;
-			}
-			arr[j + 1] = key; // Вставляем элемент на нужное место
-		}
+		AntonCHDLL::Class1::L3_sort_9(arr, arr_len);
 		AntonCHDLL::Class1::output_mas(arr, arr_len, Result9DG);
 	}
 	private: System::Void Generate10Btn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1297,26 +1251,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		int arr_len = AntonCHDLL::Class1::Vvod(ArrLen10TB);
 		int* arr = new int[arr_len] {};
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start10DG);
-		for (int i = 1; i < arr_len; ++i) {
-			int key = arr[i];
-			int left = 0;
-			int right = i - 1;
-
-			while (left <= right) {
-				int mid = left + (right - left) / 2;
-				if (arr[mid] > key) {
-					right = mid - 1;
-				}
-				else {
-					left = mid + 1;
-				}
-			}
-
-			for (int j = i - 1; j >= left; --j) {
-				arr[j + 1] = arr[j];
-			}
-			arr[left] = key;
-		}
+		AntonCHDLL::Class1::L3_sort_10(arr, arr_len);
 		AntonCHDLL::Class1::output_mas(arr, arr_len, Result10DG);
 	}
 	private: System::Void Generate12Btn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1326,17 +1261,7 @@ private: System::Windows::Forms::DataGridView^ Start12DG;
 		int arr_len = AntonCHDLL::Class1::Vvod(ArrLen12TB);
 		int* arr = new int[arr_len] {};
 		AntonCHDLL::Class1::input_mas(arr, arr_len, Start12DG);
-
-		for (int i = 0; i < arr_len - 1; ++i) {
-			for (int j = 0; j < arr_len - i - 1; ++j) {
-				if (arr[j] > arr[j + 1]) {
-					int t = arr[j];
-					arr[j] = arr[j + 1];
-					arr[j + 1] = t;
-				}
-			}
-		}
-
+		AntonCHDLL::Class1::L3_sort_12(arr, arr_len);
 		AntonCHDLL::Class1::output_mas(arr, arr_len, Result12DG);
 	}
 };
